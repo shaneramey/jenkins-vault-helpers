@@ -32,4 +32,3 @@ def getVaultToken() {
         return auth_token
     }
 }
-
