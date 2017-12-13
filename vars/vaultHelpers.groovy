@@ -27,12 +27,16 @@ def getVaultToken() {
         def vault_cacert = getVaultCacert()
         def token_auth_cmd = ['sh', '-c', "PATH=/usr/bin VAULT_ADDR=${vault_addr} VAULT_CACERT=${vault_cacert} /usr/local/bin/vault auth -method=ldap username=$VAULT_USER password=$VAULT_PASSWORD"]
         println("Attempting auth with command: " + token_auth_cmd)
-        sout = token_auth_cmd.execute().text
+        def proc = token_auth_cmd.execute()
+        proc.waitFor()
         result = sout.split("\n")
-        if (result.size() >= 3) {
+        if (proc.exitValue() == 0) {
             auth_token = result[3].split(" ")[1].toString()
         } else {
-            error('Auth token retrieval failed. Result: ' + result)
+            error('Auth token retrieval failed. ' + \
+                  ' stdout: ' + proc.out.text + \
+                  '. stderr: ' + proc.err.text
+                 )
         }
         return auth_token
     }
