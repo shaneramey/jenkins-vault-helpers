@@ -29,6 +29,7 @@ def getVaultToken() {
         println("Attempting auth with command: " + token_auth_cmd)
         sout = token_auth_cmd.execute().text
         result = sout.split("\n")
+        println("Result: " + result)
         if (result.size() > 0) {
             auth_token = result[3].split(" ")[1].toString()
         } else {
