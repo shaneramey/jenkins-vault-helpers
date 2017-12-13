@@ -29,7 +29,7 @@ def getVaultToken() {
         println("Attempting auth with command: " + token_auth_cmd)
         def proc = token_auth_cmd.execute()
         proc.waitFor()
-        result = proc.out.text
+        result = proc.in.text
         if (proc.exitValue() == 0 && result.size() >= 3) {
             auth_token = result[3].split(" ")[1].toString()
         } else {
