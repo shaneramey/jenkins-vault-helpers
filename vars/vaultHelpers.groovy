@@ -30,9 +30,10 @@ def getVaultToken() {
         def proc = token_auth_cmd.execute()
         proc.waitFor()
         result = proc.in.text
-        if (proc.exitValue() == 0 && result.size() >= 3) {
+        resultlist = result.split("\n")
+        if (proc.exitValue() == 0 && resultlist.size() >= 3) {
             println("result=" + result)
-            auth_token = result[3].split(" ")[1].toString()
+            auth_token = resultlist[3].split(" ")[1].toString()
         } else {
             error('Auth token retrieval failed. ' + \
                   ' stdout: ' + result + \
