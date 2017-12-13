@@ -32,7 +32,6 @@ def getVaultToken() {
         result = proc.in.text
         resultlist = result.split("\n")
         if (proc.exitValue() == 0 && resultlist.size() >= 3) {
-            println("result=" + result)
             auth_token = resultlist[3].split(" ")[1].toString()
         } else {
             error('Auth token retrieval failed. ' + \
