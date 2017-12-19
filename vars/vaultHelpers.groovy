@@ -4,7 +4,6 @@ def getVaultAddr() {
 
     def env = System.getenv()
     def environment_configured_vault_addr = env['VAULT_ADDR']
-    println("environment_configured_vault_addr=" + environment_configured_vault_addr)
     if(environment_configured_vault_addr?.trim()) {
         vault_address = environment_configured_vault_addr
     }
@@ -16,7 +15,6 @@ def getVaultCacert() {
     def vault_cacertificate = '/var/run/secrets/kubernetes.io/serviceaccount/ca.crt'
     def env = System.getenv()
     def environment_configured_vault_cacert = env['VAULT_CACERT']
-    println("environment_configured_vault_cacert=" + environment_configured_vault_cacert)
     if(environment_configured_vault_cacert?.trim()) {
         vault_cacertificate = environment_configured_vault_cacert
     }
